@@ -4,19 +4,6 @@ Route::get('/', function () {
     return view ('master');
 });
 
-Route::get('/hello-world', function () {
-    return 'Doni Huhahahahahaha';
-});
-
-Route::get('/coba/{var}', function($variabel){
-	return $variabel;
-});
-
-
-Route::get('/hello/{var?}', function($variabel = "Belum ada isinya"){
-	return $variabel;
-});
-
 //------------------------------------------------------------------
 
 Route::get('/pengguna', 'PenggunaController@awal');
@@ -48,7 +35,6 @@ Route::get('/mahasiswa/tambah/route', function(){
 //------------------------------------------------------------------
 
 Route::get('/ruangan', 'RuanganController@awal');
-
 Route::get('/ruangan/tambah', 'RuanganController@tambah');
 
 //------------------------------------------------------------------
@@ -65,9 +51,9 @@ Route::get('/dosen_matakuliah/tambah', 'Dosen_MatakuliahController@tambah');
 
 //------------------------------------------------------------------
 
-Route::get('/jadwal_matakuliah', 'Jadwal_matakuliahController@awal');
+Route::get('/jadwal_kuliah', 'Jadwal_KuliahController@awal');
 
-Route::get('/jadwal_matakuliah/tambah', 'Jadwal_matakuliahController@tambah');
+Route::get('/jadwal_kuliah/tambah', 'Jadwal_KuliahController@tambah');
 
 //------------------------------------------------------------------
 
@@ -119,8 +105,28 @@ Route::get('dosen_matakuliah/hapus/{dosen_matakuliah}', 'Dosen_matakuliahControl
 
 //------------------------------------------------------------------
 
-Route::get('jadwal_matakuliah/{jadwal_matakuliah}', 'Jadwal_matakuliahController@lihat');
-Route::post('jadwal_matakuliah/simpan', 'Jadwal_matakuliahController@simpan');
-Route::get('jadwal_matakuliah/edit/{jadwal_matakuliah}', 'Jadwal_matakuliahController@edit');
-Route::post('jadwal_matakuliah/edit/{jadwal_matakuliah}', 'Jadwal_matakuliahController@update');
-Route::get('jadwal_matakuliah/hapus/{jadwal_matakuliah}', 'Jadwal_matakuliahController@hapus');
+Route::get('jadwal_kuliah/{jadwal_kuliah}', 'Jadwal_KuliahController@lihat');
+Route::post('jadwal_kuliah/simpan', 'Jadwal_KuliahController@simpan');
+Route::get('jadwal_kuliah/edit/{jadwal_kuliah}', 'Jadwal_KuliahController@edit');
+Route::post('jadwal_kuliah/edit/{jadwal_kuliah}', 'Jadwal_KuliahController@update');
+Route::get('jadwal_kuliah/hapus/{jadwal_kuliah}', 'Jadwal_KuliahController@hapus');
+
+//------------------------------------------------------------------
+
+    Route::get('relasi/mahasiswa',function(){
+    $mahasiswa=App\Pengguna::find(5)->mahasiswa;
+    return "<li>$mahasiswa";
+});
+
+
+    Route::get('relasi/pengguna',function(){
+    $mahasiswa=App\Pengguna::find(5)->pengguna;
+    return "<li>$pengguna";
+});
+
+
+    Route::get('relasi/dosen',function(){
+    $mahasiswa=App\Pengguna::find(1)->dosen;
+    return "<li>$pengguna";
+});
+
