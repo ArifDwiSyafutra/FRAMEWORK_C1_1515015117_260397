@@ -8,15 +8,24 @@ class Mahasiswa extends Model
 {
     protected $table = 'Mahasiswa';
     protected $guarded =['id'];
-   // protected $fillable = ['nama','nim','alamat','pengguna_id'];
+    protected $fillable = ['nama','nim','alamat','pengguna_id'];
 
     public function pengguna()
     {
-    	return $thi->belongTo(pengguna::class);
+    	return $this->belongsTo(pengguna::class);
     }
 
     public function Jadwal_Kuliah()
     {
-    return $thi->hasMany(Jadwal_Kuliah::class,'Mahasiswa_id');	
+    return $this->hasMany(Jadwal_Kuliah::class,'Mahasiswa_id');	
     }
+
+    public function listMahasiswaDanNIm(){
+        $out =[];
+        foreach ($this->all() as $mhs) {
+            $out[$mhs->id]="{$mhs->nama} ({$mhs->nim})";
+        }
+        return $out;
+    }
+
 }

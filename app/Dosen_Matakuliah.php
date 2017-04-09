@@ -9,11 +9,39 @@ class Dosen_Matakuliah extends Model
     protected $table = 'Dosen_Matakuliah';
     protected $fillable = ['dosen_id','matakuliah_id'];
 
-    public function Dosen(){
-    	return $this->belongsTo(Dosen::class);
+     public function Dosen()
+    {
+        return $this->belongsTo(Dosen::class);
     }
-    public function Jadwal_Kuliah(){
 
-    	return $this->hasMany(Jadwal_Kuliah::class);
+    public function Matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class);
+    }
+
+    public function Jadwal_Matakuliah()
+    {
+        return $this->hasMany(Jadwal_Kuliah::class);
+    }
+
+    public function getNamadosenAttribute(){
+        return $this->dosen->nama;
+    }
+
+    public function getNipdosenAttribute(){
+        return $this->dosen->nip;
+    }
+    
+    public function getTitlematakuliahAttribute(){
+        return $this->matakuliah->title;
+    }
+    
+    public function listDosenDanMatakuliah()
+    {
+        $out = [];
+        foreach ($this->all() as $dsnMtk) {
+            $out[$dsnMtk->id] = "{$dsnMtk->dosen->nama} {$dsnMtk->dosen->nip} (Matakuliah {$dsnMtk->matakuliah->title})";
+        }
+        return $out;
     }
 }

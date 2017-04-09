@@ -13,19 +13,19 @@ class PenggunaController extends Controller
 
     public function awal() 
     {
-        return view('pengguna.awal', ['data' => Pengguna::all()]);
+    	return view('pengguna.awal', ['data' => Pengguna::all()]);
     }
 
     public function tambah()
     {
-        return view('pengguna.tambah');
+    	return view('pengguna.tambah');
     }
 
     public function simpan(Request $input)
     {
-        $pengguna = new Pengguna();
-        $pengguna->username = $input->username;
-        $pengguna->password = $input->password;
+    	$pengguna = new Pengguna();
+    	$pengguna->username = $input->username;
+    	$pengguna->password = $input->password;
         $informasi = $pengguna->save() ? 'Berhasil simpan data' : ' Gagal';
         return redirect('pengguna')->with(['informasi'=>$informasi]);
     }
